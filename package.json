@@ -8,6 +8,10 @@
     "lint": "eslint --fix 'src/**/*.ts'",
     "format": "prettier --write src/**/*.ts"
   },
+  "repository": {
+    "type": "git",
+    "url": "リポジトリのURL"
+  },
   "keywords": [],
   "author": "Tanaka Yoichiro",
   "license": "MIT",
