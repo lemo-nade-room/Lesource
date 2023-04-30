@@ -8,12 +8,12 @@ export const DEFAULT_AFTER: After = () => {};
 
 export  class HTTPResourceImpl<T extends Content>  implements HTTPResource<T> {
     constructor(
-        private readonly decoder: (object: unknown) => T,
-        private readonly baseURL: string,
-        private readonly paths: readonly string[],
-        private readonly headers: Readonly<Headers>,
-        private readonly before: Before,
-        private readonly after: After
+        readonly decoder: (object: unknown) => T,
+        readonly baseURL: string,
+        readonly paths: readonly string[],
+        readonly headers: Readonly<Headers>,
+        readonly before: Before,
+        readonly after: After
     ) {}
 
     async get(): Promise<T> {
@@ -73,7 +73,7 @@ export  class HTTPResourceImpl<T extends Content>  implements HTTPResource<T> {
             before?: Before,
             after?: After
         }
-    ): HTTPResource<K> {
+    ): HTTPResourceImpl<K> {
         return new HTTPResourceImpl(
             (json: unknown) => Model.decode(json),
             this.baseURL,
@@ -97,7 +97,7 @@ export  class HTTPResourceImpl<T extends Content>  implements HTTPResource<T> {
             before?: Before,
             after?: After
         }
-    ): HTTPResource<K> {
+    ): HTTPResourceImpl<K> {
         return new HTTPResourceImpl(
             decoder,
             this.baseURL,
@@ -111,17 +111,17 @@ export  class HTTPResourceImpl<T extends Content>  implements HTTPResource<T> {
     createArrayOf<K extends Encodable>(
         Model: Decodable<K>,
         {
-            paths,
+            paths = [],
             headers = new Headers(),
             before = DEFAULT_BEFORE,
             after = DEFAULT_AFTER,
         }: {
-            paths: readonly string[],
+            paths?: readonly string[],
             headers?: Headers,
             before?: Before,
             after?: After
         }
-    ): HTTPResource<readonly K[]> {
+    ): HTTPResourceImpl<readonly K[]> {
         return new HTTPResourceImpl(
             (json: unknown) => decodeArrayAs(Model, json),
             this.baseURL,
@@ -135,7 +135,7 @@ export  class HTTPResourceImpl<T extends Content>  implements HTTPResource<T> {
     createArrayBy<K extends Encodable>(
         decoder: Decoder<K>,
         {
-            paths,
+            paths = [],
             headers = new Headers(),
             before = DEFAULT_BEFORE,
             after = DEFAULT_AFTER,
@@ -145,7 +145,7 @@ export  class HTTPResourceImpl<T extends Content>  implements HTTPResource<T> {
             before?: Before,
             after?: After
         }
-    ): HTTPResource<readonly K[]> {
+    ): HTTPResourceImpl<readonly K[]> {
         return new HTTPResourceImpl(
             (json: unknown) => decodeArrayBy(decoder, json),
             this.baseURL,

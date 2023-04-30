@@ -13,9 +13,10 @@ const decoder: Decoder<Base> = (json: unknown) => new Base();
 
 export class HTTPResourceFactory {
 
-    private readonly root: HTTPResource<Base>
 
-    constructor(
+    constructor(private readonly root: HTTPResourceImpl<Base>) {}
+
+    static readonly create = (
         {
             baseURL,
             headers = new Headers(),
@@ -27,9 +28,7 @@ export class HTTPResourceFactory {
             before?: Before,
             after?: After,
         }
-    ) {
-        this.root = new HTTPResourceImpl(decoder, baseURL, [], headers, before, after);
-    }
+    ) => new HTTPResourceFactory(new HTTPResourceImpl(decoder, baseURL, [], headers, before, after));
 
     /**
      * NetworkResourceを生成する
@@ -98,4 +97,27 @@ export class HTTPResourceFactory {
     ): HTTPResource<readonly T[]> {
         return this.root.createArrayBy(decoder, options);
     }
+
+   patch(options: {
+       baseURL?: string,
+       headers?: Headers,
+       before?: Before,
+       after?: After,
+   }): HTTPResourceFactory {
+        return HTTPResourceFactory.create({
+            baseURL: options.baseURL ?? this.root.baseURL,
+            headers: options.headers ?? this.root.headers,
+            before: options.before ?? this.root.before,
+            after: options.after ?? this.root.after,
+        })
+   }
+
+   merge(options: {
+       headers?: Headers,
+       before?: Before,
+       after?: After,
+   }): HTTPResourceFactory {
+        const next = this.root.createBy(decoder, options)
+        return new HTTPResourceFactory(next)
+   }
 }
