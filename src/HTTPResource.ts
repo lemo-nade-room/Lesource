@@ -42,11 +42,19 @@ export interface HTTPResource<T extends Content> {
      * @param after 現在のafterに追加するafter
      */
     createOf<K extends Encodable>(
-        Model: Decodable<K>,
-        paths: readonly string[],
-        headers?: Headers,
-        before?: Before,
-        after?: After
+        {
+            Model,
+            paths,
+            headers,
+            before,
+            after,
+        }: {
+            Model: Decodable<K>,
+            paths: readonly string[],
+            headers?: Headers,
+            before?: Before,
+            after?: After
+        }
     ): HTTPResource<K>;
 
     /**
@@ -58,11 +66,19 @@ export interface HTTPResource<T extends Content> {
      * @param after 現在のafterに追加するafter
      */
     createBy<K extends Encodable>(
-        decoder: Decoder<K>,
-        paths: readonly string[],
-        headers?: Headers,
-        before?: Before,
-        after?: After
+        {
+            decoder,
+            paths,
+            headers,
+            before,
+            after,
+        }: {
+            decoder: Decoder<K>,
+            paths: readonly string[],
+            headers?: Headers,
+            before?: Before,
+            after?: After
+        }
     ): HTTPResource<K>;
 
     /**
@@ -74,11 +90,19 @@ export interface HTTPResource<T extends Content> {
      * @param after 現在のafterに追加するafter
      */
     createArrayOf<K extends Encodable>(
-        Model: Decodable<K>,
-        paths: readonly string[],
-        headers?: Headers,
-        before?: Before,
-        after?: After
+        {
+            Model,
+            paths,
+            headers,
+            before,
+            after,
+        }: {
+            Model: Decodable<K>,
+            paths: readonly string[],
+            headers?: Headers,
+            before?: Before,
+            after?: After
+        }
     ): HTTPResource<readonly K[]>;
 
     /**
@@ -90,10 +114,18 @@ export interface HTTPResource<T extends Content> {
      * @param after 現在のafterに追加するafter
      */
     createArrayBy<K extends Encodable>(
-        decoder: Decoder<K>,
-        paths: readonly string[],
-        headers?: Headers,
-        before?: Before,
-        after?: After
+        {
+            decoder,
+            paths,
+            headers,
+            before,
+            after,
+        }: {
+            decoder: Decoder<K>,
+            paths: readonly string[],
+            headers?: Headers,
+            before?: Before,
+            after?: After
+        }
     ): HTTPResource<readonly K[]>;
 }
