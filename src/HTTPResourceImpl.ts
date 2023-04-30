@@ -3,10 +3,12 @@ import {validate} from "./fetchError";
 import {Encodable, encodeArray} from "./codable/encode";
 import {Decodable, decodeArrayAs, decodeArrayBy, Decoder} from "./codable/decode";
 
-export const DEFAULT_BEFORE: Before = () => {};
-export const DEFAULT_AFTER: After = () => {};
+export const DEFAULT_BEFORE: Before = () => {
+};
+export const DEFAULT_AFTER: After = () => {
+};
 
-export  class HTTPResourceImpl<T extends Content>  implements HTTPResource<T> {
+export class HTTPResourceImpl<T extends Content> implements HTTPResource<T> {
     constructor(
         readonly decoder: (object: unknown) => T,
         readonly baseURL: string,
@@ -14,7 +16,8 @@ export  class HTTPResourceImpl<T extends Content>  implements HTTPResource<T> {
         readonly headers: Readonly<Headers>,
         readonly before: Before,
         readonly after: After
-    ) {}
+    ) {
+    }
 
     async get(): Promise<T> {
         await this.before();
@@ -161,8 +164,10 @@ export  class HTTPResourceImpl<T extends Content>  implements HTTPResource<T> {
     }
 
     private mergeHeaders(headers: Headers): Headers {
-        const result = new Headers(this.headers);
-        headers.forEach((value, key) => result.set(key, value));
+        const result = new Headers(headers)
+        new Headers(this.headers).forEach((value, key) => {
+            result.set(key, value);
+        })
         return result;
     }
 

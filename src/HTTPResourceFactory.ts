@@ -14,8 +14,15 @@ const decoder: Decoder<Base> = (json: unknown) => new Base();
 export class HTTPResourceFactory {
 
 
-    constructor(private readonly root: HTTPResourceImpl<Base>) {}
+    private constructor(private readonly root: HTTPResourceImpl<Base>) {}
 
+    /**
+     * Factoryインスタンスを生成する
+     * @param baseURL ベースURL
+     * @param headers ヘッダー
+     * @param before リクエスト前処理
+     * @param after リクエスト後処理
+     */
     static readonly create = (
         {
             baseURL,
@@ -98,6 +105,9 @@ export class HTTPResourceFactory {
         return this.root.createArrayBy(decoder, options);
     }
 
+    /**
+     * Factoryの設定を上書きする
+     */
    patch(options: {
        baseURL?: string,
        headers?: Headers,
@@ -112,6 +122,10 @@ export class HTTPResourceFactory {
         })
    }
 
+    /**
+     * Factoryの設定を追加する
+     * @param options
+     */
    merge(options: {
        headers?: Headers,
        before?: Before,
