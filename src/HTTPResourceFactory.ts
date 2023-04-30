@@ -23,7 +23,7 @@ export class HTTPResourceFactory {
      * @param before リクエスト前処理
      * @param after リクエスト後処理
      */
-    static readonly create = (
+    static readonly init = (
         {
             baseURL,
             headers = new Headers(),
@@ -108,13 +108,13 @@ export class HTTPResourceFactory {
     /**
      * Factoryの設定を上書きする
      */
-   patch(options: {
+   update(options: {
        baseURL?: string,
        headers?: Headers,
        before?: Before,
        after?: After,
    }): HTTPResourceFactory {
-        return HTTPResourceFactory.create({
+        return HTTPResourceFactory.init({
             baseURL: options.baseURL ?? this.root.baseURL,
             headers: options.headers ?? this.root.headers,
             before: options.before ?? this.root.before,
