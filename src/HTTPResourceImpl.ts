@@ -61,15 +61,14 @@ export  class HTTPResourceImpl<T extends Content>  implements HTTPResource<T> {
     }
 
     createOf<K extends Encodable>(
+        Model: Decodable<K>,
         {
-            Model,
-            paths,
+            paths = [],
             headers = new Headers(),
             before = DEFAULT_BEFORE,
             after = DEFAULT_AFTER,
         }: {
-            Model: Decodable<K>,
-            paths: readonly string[],
+            paths?: readonly string[],
             headers?: Headers,
             before?: Before,
             after?: After
@@ -86,15 +85,14 @@ export  class HTTPResourceImpl<T extends Content>  implements HTTPResource<T> {
     }
 
     createBy<K extends Encodable>(
+        decoder: Decoder<K>,
         {
-            decoder,
-            paths,
+            paths = [],
             headers = new Headers(),
             before = DEFAULT_BEFORE,
             after = DEFAULT_AFTER,
         }: {
-            decoder: Decoder<K>,
-            paths: readonly string[],
+            paths?: readonly string[],
             headers?: Headers,
             before?: Before,
             after?: After
@@ -111,14 +109,13 @@ export  class HTTPResourceImpl<T extends Content>  implements HTTPResource<T> {
     }
 
     createArrayOf<K extends Encodable>(
+        Model: Decodable<K>,
         {
-            Model,
             paths,
             headers = new Headers(),
             before = DEFAULT_BEFORE,
             after = DEFAULT_AFTER,
         }: {
-            Model: Decodable<K>,
             paths: readonly string[],
             headers?: Headers,
             before?: Before,
@@ -136,14 +133,13 @@ export  class HTTPResourceImpl<T extends Content>  implements HTTPResource<T> {
     }
 
     createArrayBy<K extends Encodable>(
+        decoder: Decoder<K>,
         {
-            decoder,
             paths,
             headers = new Headers(),
             before = DEFAULT_BEFORE,
             after = DEFAULT_AFTER,
         }: {
-            decoder: Decoder<K>,
             paths: readonly string[],
             headers?: Headers,
             before?: Before,

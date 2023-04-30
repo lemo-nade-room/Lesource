@@ -33,57 +33,69 @@ export class HTTPResourceFactory {
 
     /**
      * NetworkResourceを生成する
+     * @param Model 生成リソースの型
      * @param options
      */
-    createOf<T extends Encodable>(options: {
-            Model: Decodable<T>,
-            paths: readonly string[],
+    createOf<T extends Encodable>(
+        Model: Decodable<T>,
+        options: {
+            paths?: readonly string[],
             headers?: Headers,
             before?: Before,
             after?: After,
-    }): HTTPResource<T> {
-        return this.root.createOf(options);
+        }
+    ): HTTPResource<T> {
+        return this.root.createOf(Model, options);
     }
 
     /**
      * NetworkResourceを生成する
+     * @param decoder 生成リソースの型への変換関数
      * @param options
      */
-    createBy<T extends Encodable>(options: {
-            decoder: Decoder<T>,
-            paths: readonly string[],
+    createBy<T extends Encodable>(
+        decoder: Decoder<T>,
+        options: {
+            paths?: readonly string[],
             headers?: Headers,
             before?: Before,
             after?: After,
-    }): HTTPResource<T> {
-        return this.root.createBy(options);
+        }
+    ): HTTPResource<T> {
+        return this.root.createBy(decoder, options);
     }
 
     /**
      * NetworkResourceを生成する
+     * @param Model 生成リソースの型
      * @param options
      */
-    createArrayOf<T extends Encodable>(options: {
-            Model: Decodable<T>,
-            paths: readonly string[],
+    createArrayOf<T extends Encodable>(
+        Model: Decodable<T>,
+        options: {
+            paths?: readonly string[],
             headers?: Headers,
             before?: Before,
             after?: After,
-    }): HTTPResource<readonly T[]> {
-        return this.root.createArrayOf(options);
+        }
+    ): HTTPResource<readonly T[]> {
+        return this.root.createArrayOf(Model, options);
     }
 
     /**
      * NetworkResourceを生成する
+     * @param decoder 生成リソースの型への変換関数
      * @param options
      */
-    createArrayBy<T extends Encodable>(options: {
-            decoder: Decoder<T>,
+    createArrayBy<T extends Encodable>(
+        decoder: Decoder<T>,
+        options: {
             paths: readonly string[],
             headers?: Headers,
             before?: Before,
             after?: After,
-    }): HTTPResource<readonly T[]> {
-        return this.root.createArrayBy(options);
+        }
+    ): HTTPResource<readonly T[]> {
+        return this.root.createArrayBy(decoder, options);
     }
 }

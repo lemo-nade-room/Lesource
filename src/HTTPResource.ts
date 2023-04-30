@@ -42,15 +42,14 @@ export interface HTTPResource<T extends Content> {
      * @param after 現在のafterに追加するafter
      */
     createOf<K extends Encodable>(
+        Model: Decodable<K>,
         {
-            Model,
             paths,
             headers,
             before,
             after,
         }: {
-            Model: Decodable<K>,
-            paths: readonly string[],
+            paths?: readonly string[],
             headers?: Headers,
             before?: Before,
             after?: After
@@ -66,15 +65,14 @@ export interface HTTPResource<T extends Content> {
      * @param after 現在のafterに追加するafter
      */
     createBy<K extends Encodable>(
+        decoder: Decoder<K>,
         {
-            decoder,
             paths,
             headers,
             before,
             after,
         }: {
-            decoder: Decoder<K>,
-            paths: readonly string[],
+            paths?: readonly string[],
             headers?: Headers,
             before?: Before,
             after?: After
@@ -90,15 +88,14 @@ export interface HTTPResource<T extends Content> {
      * @param after 現在のafterに追加するafter
      */
     createArrayOf<K extends Encodable>(
+        Model: Decodable<K>,
         {
-            Model,
             paths,
             headers,
             before,
             after,
         }: {
-            Model: Decodable<K>,
-            paths: readonly string[],
+            paths?: readonly string[],
             headers?: Headers,
             before?: Before,
             after?: After
@@ -114,15 +111,14 @@ export interface HTTPResource<T extends Content> {
      * @param after 現在のafterに追加するafter
      */
     createArrayBy<K extends Encodable>(
+        decoder: Decoder<K>,
         {
-            decoder,
             paths,
             headers,
             before,
             after,
         }: {
-            decoder: Decoder<K>,
-            paths: readonly string[],
+            paths?: readonly string[],
             headers?: Headers,
             before?: Before,
             after?: After
