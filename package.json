@@ -1,8 +1,8 @@
 {
-  "name": "@lemo/lesource",
+  "name": "@lemonaderoom/lesource",
   "version": "0.0.1",
   "description": "HTTP Resource CRUD Manager",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "vitest",
     "lint": "eslint --fix 'src/**/*.ts'",
