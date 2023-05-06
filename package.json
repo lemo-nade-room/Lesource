@@ -1,6 +1,6 @@
 {
   "name": "@lemonaderoom/lesource",
-  "version": "0.0.8",
+  "version": "0.0.16",
   "description": "HTTP Resource CRUD Manager",
   "main": "dist/index.js",
   "scripts": {
